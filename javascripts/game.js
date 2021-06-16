@@ -23,6 +23,14 @@ loadSprite('z', 'z.kbmsprite')
 scene("game", ( => {
     layers(['bg', 'obj', 'ui'], 'obj')
 
+    const map = [
+        'w         j   j    j    j    j  m   mm                                             ',
+        'w   j   j   j   jttt  j   ttt                                                      ',
+        'w     j    sss   gffgffg                                                           ',
+        'wbbbbeehqhbbbbbeeeeqheeebhebehqbhbebebebebbebebeeeee                               ',
+        'nnnnnnnnnnnnnnnnzzzzzzzzzzzzzzzzzzzznnnnnnnnnnnnnnzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz',
+    ]
+
 })
 
 start("game")
