@@ -20,7 +20,7 @@ loadSprite('t', 't.kbmsprite')
 loadSprite('v', 'v.kbmsprite')
 loadSprite('z', 'z.kbmsprite')
 
-scene("game", ( => {
+scene("game", () => {
     layers(['bg', 'obj', 'ui'], 'obj')
 
     const map = [
@@ -47,6 +47,8 @@ scene("game", ( => {
   'b': [ sprite('b'), scale(2), solid(), 'a','dangerous'],
   'e': [ sprite('e'), scale(3), solid(), 'e','dangerous'],
     }
+
+    const gameLevel = addLevel(map, levelCfg)
 
 })
 
