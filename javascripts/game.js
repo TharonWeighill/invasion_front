@@ -20,4 +20,9 @@ loadSprite('t', 't.kbmsprite')
 loadSprite('v', 'v.kbmsprite')
 loadSprite('z', 'z.kbmsprite')
 
+scene("game", ( => {
+    layers(['bg', 'obj', 'ui'], 'obj')
 
+})
+
+start("game")
