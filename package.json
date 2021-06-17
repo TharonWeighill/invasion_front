@@ -4,7 +4,7 @@
   "description": "",
   "main": "javascripts/game.js",
   "scripts": {
-    "dev": "lite-server"
+    "dev": "lite-server -c bs-config.json"
   },
   "repository": {
     "type": "git",

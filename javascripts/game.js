@@ -1,8 +1,37 @@
+let state = {
+    player: {
+        id: null,
+        name: null
+    },
+    gameInProgress: false
+};
+
+const playerForm = document.getElementById('player-form');
+playerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const playerNameInput = document.getElementById('player-name-input');
+    return fetch('http://localhost:3000/players', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: playerNameInput.value
+        })
+    }).then((response) => console.log(response))
+        // .then((playerData) => Object.assign(state, {
+        //     id: playerData.id,
+        //     name: playerData.name
+        // }))
+        .catch((error) => console.error(error));
+});
+
 kaboom({
     global: true,
-    fullscreen: true,
-    scale: 1,
+    canvas: document.getElementById('game'),
+    scale: 2,
     debug: true,
+    clearColor: [0, 0, 0, 0]
 });
 
 loadRoot('../sprites/');
@@ -24,6 +53,11 @@ scene("game", () => {
     layers(['bg', 'obj', 'ui'], 'obj');
 
     const map = [
+        '                                                                                   ',
+        '                                                                                   ',
+        '                                                                                   ',
+        '                                                                                   ',
+        '                                                                                   ',
         'w         j   j    j    j    j  m   mm                                             ',
         'w   j   j   j   jttt  j   ttt                                                      ',
         'w     j    sss   gffgffg                                                           ',
@@ -52,4 +86,24 @@ scene("game", () => {
 
 });
 
-start("game");
+// if !state.user.name && !state.gameInProgress
+// render form
+// take in name
+// onclick -> POST request to API
+// if resolved, state.userLoggin
+// state.user.name = response.username && state.gameInProgress = true
+// else if state.username && state.gameInProgress
+// render game
+// when the game ends (kaboom event)
+// POST to kaboom score to API (where user.id = state.user.id)
+// if resolved -> render scoreboard
+
+// if at anytime a request fails, you can render an error screen
+
+if (!state.gameInProgress && !state.player.name && !state.player.id) {
+    //
+}
+
+if (state.gameInProgress && state.player.name && state.player.id) {
+    start("game");
+}
