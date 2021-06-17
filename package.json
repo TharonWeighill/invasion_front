@@ -1,0 +1,23 @@
+{
+  "name": "alien-invasion-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "javascripts/game.js",
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TharonWeighill/invasion_front.git"
+  },
+  "keywords": [],
+  "author": "Tharon Weighill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TharonWeighill/invasion_front/issues"
+  },
+  "homepage": "https://github.com/TharonWeighill/invasion_front#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
