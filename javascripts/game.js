@@ -7,23 +7,6 @@ let state = {
 };
 
 const playerForm = document.getElementById('player-form');
-
-// const handleSubmit = (e) => {
-//     e.preventDefault();
-//     const data = {
-//         name: playerForm().value
-//     };
-//     return fetch('http://localhost:3000/players'), {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     }
-//         .then(resp => resp.json())
-//         .then(json => { debugger; });
-// };
-
 playerForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const playerNameInput = document.getElementById('player-name-input');
@@ -45,10 +28,11 @@ playerForm.addEventListener('submit', (e) => {
 
 kaboom({
     global: true,
+
     canvas: document.getElementById('game'),
     scale: 2,
     debug: true,
-    clearColor: [0, 0, 0, 0]
+    clearColor: [0, 0, 0, 1]
 });
 
 loadRoot('../sprites/');
@@ -101,26 +85,172 @@ scene("game", () => {
 
     const gameLevel = addLevel(map, levelCfg);
 
+    const player = add([
+        sprite('v'),
+        scale(.5),
+        pos(20, 20)
+    ]);
+
+    player.collides('dangerous', () => {
+        destroy(player);
+    });
+
+    player.action(() => {
+        camPos(player.pos),
+            camScale(.55);
+    });
+
+    const TIME_LEFT = 30;
+
+    const timer = add([
+        text('0'),
+        pos(player.pos),
+        scale(.5),
+        layer('ui'),
+        {
+            time: TIME_LEFT,
+        },
+    ]);
+
+    timer.action(() => {
+        timer.time -= dt();
+        timer.text = timer.time.toFixed(2);
+        if (timer.time <= 0) {
+            go('over, score.value');
+        }
+
+    });
+
+    const score = add([
+        text('0'),
+        pos(5, 5),
+        layer('ui'),
+        {
+            value: 0,
+        }
+    ]);
+
+    const MOVE_SPEED = 100;
+
+    keyDown('left', () => {
+        player.move(-MOVE_SPEED, 0);
+    });
+    keyDown('right', () => {
+        player.move(MOVE_SPEED, 0);
+    });
+    keyDown('up', () => {
+        player.move(0, -MOVE_SPEED);
+    });
+    keyDown('down', () => {
+        player.move(0, MOVE_SPEED);
+    });
+
+    function spawnBullet(p) {
+        add([
+            rect(5, 10),
+            pos(p),
+            origin('center'),
+            color(.1, 0.9, 1),
+            'bullet'
+        ]);
+    }
+
+    const BULLET_SPEED = 100;
+    action('bullet', (b) => {
+        b.move(0, +BULLET_SPEED);
+        if (b.pos.y < 0) {
+            destroy(b);
+        }
+    });
+
+
+    keyPress('space', () => {
+        spawnBullet(player.pos.add(12, 30));
+    });
+
+
+    collides('bullet', 's', (b, s) => {
+        destroy(s);
+        destroy(b);
+        score.value++;
+        score.text = score.value;
+    });
+
+    collides('bullet', 'a', (b, a) => {
+        destroy(a);
+        destroy(b);
+        score.value++;
+        score.text = score.value;
+    });
+
+    collides('bullet', 'e', (b, e) => {
+        destroy(e);
+        destroy(b);
+        score.value++;
+        score.text = score.value;
+    });
+
+    collides('bullet', 'f', (b, f) => {
+        destroy(f);
+        destroy(b);
+        score.value++;
+        score.text = score.value;
+    });
+
+    collides('bullet', 'g', (b, g) => {
+        destroy(g);
+        destroy(b);
+        score.value++;
+        score.text = score.value;
+    });
+
+    collides('bullet', 'h', (b, h) => {
+        destroy(h);
+        destroy(b);
+        score.value++;
+        score.text = score.value;
+    });
+
+    collides('bullet', 'm', (b, m) => {
+        destroy(m);
+        destroy(b);
+        score.value++;
+        score.text = score.value;
+    });
+
+    collides('bullet', 't', (b, t) => {
+        destroy(t);
+        destroy(b);
+        score.value++;
+        score.text = score.value;
+    });
+
+    collides('bullet', 'v', (b, v) => {
+        destroy(v);
+        destroy(b);
+        score.value++;
+        score.text = score.value;
+    });
+
+    // if !state.user.name && !state.gameInProgress
+    // render form
+    // take in name
+    // onclick -> POST request to API
+    // if resolved, state.userLoggin
+    // state.user.name = response.username && state.gameInProgress = true
+    // else if state.username && state.gameInProgress
+    // render game
+    // when the game ends (kaboom event)
+    // POST to kaboom score to API (where user.id = state.user.id)
+    // if resolved -> render scoreboard
+
+    // if at anytime a request fails, you can render an error screen
+
+    if (!state.gameInProgress && !state.player.name && !state.player.id) {
+        //
+    }
+
+    if (state.gameInProgress && state.player.name && state.player.id) {
+        start("game");
+    };
 });
-
-// if !state.user.name && !state.gameInProgress
-// render form
-// take in name
-// onclick -> POST request to API
-// if resolved, state.userLoggin
-// state.user.name = response.username && state.gameInProgress = true
-// else if state.username && state.gameInProgress
-// render game
-// when the game ends (kaboom event)
-// POST to kaboom score to API (where user.id = state.user.id)
-// if resolved -> render scoreboard
-
-// if at anytime a request fails, you can render an error screen
-
-if (!state.gameInProgress && !state.player.name && !state.player.id) {
-    //
-}
-
-if (state.gameInProgress && state.player.name && state.player.id) {
-    start("game");
-}
