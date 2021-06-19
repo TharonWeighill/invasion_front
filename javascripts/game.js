@@ -7,6 +7,23 @@ let state = {
 };
 
 const playerForm = document.getElementById('player-form');
+
+// const handleSubmit = (e) => {
+//     e.preventDefault();
+//     const data = {
+//         name: playerForm().value
+//     };
+//     return fetch('http://localhost:3000/players'), {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(data)
+//     }
+//         .then(resp => resp.json())
+//         .then(json => { debugger; });
+// };
+
 playerForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const playerNameInput = document.getElementById('player-name-input');
@@ -18,11 +35,11 @@ playerForm.addEventListener('submit', (e) => {
         body: JSON.stringify({
             name: playerNameInput.value
         })
-    }).then((response) => console.log(response))
-        // .then((playerData) => Object.assign(state, {
-        //     id: playerData.id,
-        //     name: playerData.name
-        // }))
+    }).then((response) => response.json())
+        .then((playerData) => Object.assign(state, {
+            id: playerData.id,
+            name: playerData.name
+        }))
         .catch((error) => console.error(error));
 });
 
