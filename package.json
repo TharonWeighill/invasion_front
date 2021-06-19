@@ -19,5 +19,8 @@
   "homepage": "https://github.com/TharonWeighill/invasion_front#readme",
   "devDependencies": {
     "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "kaboom": "^0.5.1"
   }
 }
