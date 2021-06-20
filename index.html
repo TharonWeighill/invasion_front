@@ -7,18 +7,23 @@
 </head>
 
 <body id="app">
+    <canvas id="game" class="hidden">
+
+    </canvas>
+
+    <form id='player-form'>
+        <h1> Alien Invasion!!! </h1>
+        <label for="player-name"></label>
+        <label>Enter Name</label>
+        <input type="text" name="name" id="player-name"><br>
+        <input type="submit" value="Start Game">
+    </form>
+
     <script src="https://kaboomjs.com/lib/0.5.1/kaboom.js"></script>
     <script src="javascripts/models/game.js"></script>
-    <script src="javascripts/models/player.js"></script>
     <script src="javascripts/services/playerAPI.js"></script>
     <script src="javascripts/index.js"></script>
+    <script src="javascripts/global.js"></script>
 </body>
-
-<form id='player-form'>
-    <h1> Alien Invasion!!! </h1>
-    <label>Enter Name</label>
-    <input id='player-name' />
-    <button type='submit'>START GAME</button>
-</form>
 
 </html>

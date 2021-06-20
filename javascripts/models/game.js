@@ -3,9 +3,12 @@ class Game {
         this.player = player;
     }
     start() {
+        const canvas = document.getElementById("game");
+        console.log(canvas);
+        canvas.classList.remove("hidden");
         kaboom({
             global: true,
-            canvas: document.getElementById('game'),
+            canvas,
             scale: 1,
             debug: true,
             clearColor: [0, 0, 0, 1]
