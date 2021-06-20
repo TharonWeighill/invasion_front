@@ -10,7 +10,7 @@ class Game {
             canvas,
             scale: 1.5,
             debug: true,
-            clearColor: [0, 0, 0, 3]
+            clearColor: [0, 0, 0, 0]
         });
         loadRoot('../sprites/');
         loadSprite('b', 'b.png');
@@ -68,6 +68,7 @@ class Game {
                 pos(20, 20)
             ]);
             player.collides('dangerous', () => {
+                go('lose', { score: score.value });
                 destroy(player);
             });
             player.action(() => {
@@ -83,12 +84,13 @@ class Game {
                 {
                     time: TIME_LEFT,
                 },
+
             ]);
             timer.action(() => {
                 timer.time -= dt();
                 timer.text = timer.time.toFixed(2);
                 if (timer.time <= 0) {
-                    go('over, score.value');
+                    go('lose', { score: score.value });
                 }
 
             });
