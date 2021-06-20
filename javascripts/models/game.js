@@ -2,15 +2,15 @@ class Game {
     constructor(player) {
         this.player = player;
     }
-    start() {
+    init() {
         const canvas = document.getElementById("game");
         canvas.classList.remove("hidden");
         kaboom({
             global: true,
             canvas,
-            scale: 1,
+            scale: 1.5,
             debug: true,
-            clearColor: [0, 0, 0, 1]
+            clearColor: [0, 0, 0, 3]
         });
         loadRoot('../sprites/');
         loadSprite('b', 'b.png');
@@ -27,9 +27,13 @@ class Game {
         loadSprite('v', 'v.png');
         loadSprite('z', 'z.png');
 
+
         scene("game", () => {
+            console.log(scene);
             layers(['bg', 'obj', 'ui'], 'obj');
             const map = [
+                '                                                                                   ',
+                '                                                                                   ',
                 '                                                                                   ',
                 '                                                                                   ',
                 '                                                                                   ',
@@ -183,5 +187,6 @@ class Game {
                 score.text = score.value;
             });
         });
+        start("game");
     }
 }
