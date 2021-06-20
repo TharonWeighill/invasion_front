@@ -4,7 +4,6 @@ class Game {
     }
     start() {
         const canvas = document.getElementById("game");
-        console.log(canvas);
         canvas.classList.remove("hidden");
         kaboom({
             global: true,
