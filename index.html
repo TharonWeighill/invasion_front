@@ -5,28 +5,24 @@
     <title>Alien Invasion.js</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<div class="area">
+    <h1>⚠ Alien ⚠</h1>
+    <h2>⚠ Invasion!!! ⚠</h2>
+</div>
 
 <body id="app">
     <canvas id="game">
-
     </canvas>
-
-
-
-    <div class="area">
-        <h1> ⚠ Alien ⚠</h1>
-        <form id='player-form'>
-            <label for="player-name"></label>
-            <label>Enter Name </label>
-            <input type="text" name="name" id="player-name"><br>
-            <input type="submit" value="Start Game">
-        </form>
-        <div>⚠ Invasion!!! ⚠</div>
-        <script src="https://kaboomjs.com/lib/0.5.1/kaboom.js"></script>
-        <script src="javascripts/models/game.js"></script>
-        <script src="javascripts/services/playerAPI.js"></script>
-        <script src="javascripts/index.js"></script>
-        <script src="javascripts/global.js"></script>
+    <form id='player-form'>
+        <label for="player-name"></label>
+        <input type="text" name="u" placeholder="Alien Name" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Start your Attack</button>
+    </form>
+    <script src="https://kaboomjs.com/lib/0.5.1/kaboom.js"></script>
+    <script src="javascripts/models/game.js"></script>
+    <script src="javascripts/services/playerAPI.js"></script>
+    <script src="javascripts/index.js"></script>
+    <script src="javascripts/global.js"></script>
 </body>
 
 </html>
