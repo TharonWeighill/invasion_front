@@ -1,4 +1,5 @@
 class ScoreApi {
+
     static url = `http://localhost:3000/scores`;
 
     static fetchScores() {
