@@ -3,12 +3,14 @@ class Game {
         this.player = player;
     }
     init() {
+
         const canvas = document.getElementById("game");
         canvas.classList.remove("hidden");
         kaboom({
             global: true,
             canvas,
-            scale: 1.5,
+            // fullscreen: true,
+            scale: 3,
             debug: true,
             clearColor: [0, 0, 0, 0]
         });
@@ -32,19 +34,17 @@ class Game {
             console.log(scene);
             layers(['bg', 'obj', 'ui'], 'obj');
             const map = [
-                '                                                                                   ',
-                '                                                                                   ',
-                '                                                                                  ',
-                '                                                                                   ',
-                '                                                                                   ',
-                '                                                                                   ',
-                '                                                                                   ',
-                'w         j   j    j    j    j  m   mm                                             ',
-                'w   j   j   j   jttt  j   ttt                                                      ',
-                'w     j    sss   gffgffg                                                           ',
-                'wbbbbeehqhbbbbbeeeeqheeebhebehqbhbebebebebbebebeeeee                               ',
+                '     j            j   j             j     j              j     j          j         ',
+                '         j    j          j j    j        j         j   j                       jj   ',
+                '               j   j   j     j j      j           j           jj      j  j      j   ',
+                '      j    j     j         j j      j     j    j     jj         j                   ',
+                '      j  j j     jj   j  j j    j    j   j    j             j          j   jjj      ',
+                'w   j   j   j   jttt  j   ttt                        jjj j         jj               ',
+                'w     j    sss   gffgffg                                             j              ',
+                'wbhhbbbeehqhbbbbbqeheeeqheeeqbhebehqbhbebebebebbebebeeeeewbhhbbbeehqhbbbbbqeheewbhhb',
                 'nnnnnnnnnnnnnnnnzzzzzzzzzzzzzzzzzzzznnnnnnnnnnnnnnzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz',
             ];
+
             const levelCfg = {
                 width: 40,
                 height: 40,
@@ -61,21 +61,27 @@ class Game {
                 'b': [sprite('b'), scale(2), solid(), 'a', 'dangerous'],
                 'e': [sprite('e'), scale(3), solid(), 'e', 'dangerous'],
             };
+
             const gameLevel = addLevel(map, levelCfg);
+
             const player = add([
                 sprite('v'),
                 scale(.5),
                 pos(20, 20)
             ]);
+
             player.collides('dangerous', () => {
                 go('lose', { score: score.value });
                 destroy(player);
             });
+
             player.action(() => {
                 camPos(player.pos),
                     camScale(.55);
             });
+
             const TIME_LEFT = 30;
+
             const timer = add([
                 text('0'),
                 pos(player.pos),
@@ -86,14 +92,15 @@ class Game {
                 },
 
             ]);
+
             timer.action(() => {
                 timer.time -= dt();
                 timer.text = timer.time.toFixed(2);
                 if (timer.time <= 0) {
                     go('lose', { score: score.value });
                 }
-
             });
+
             const score = add([
                 text('0'),
                 pos(5, 5),
@@ -102,6 +109,7 @@ class Game {
                     value: 0,
                 }
             ]);
+
             const MOVE_SPEED = 100;
             keyDown('left', () => {
                 player.move(-MOVE_SPEED, 0);
@@ -115,6 +123,7 @@ class Game {
             keyDown('down', () => {
                 player.move(0, MOVE_SPEED);
             });
+
             function spawnBullet(p) {
                 add([
                     rect(5, 10),
@@ -124,6 +133,7 @@ class Game {
                     'bullet'
                 ]);
             }
+
             const BULLET_SPEED = 100;
             action('bullet', (b) => {
                 b.move(0, +BULLET_SPEED);
@@ -189,6 +199,19 @@ class Game {
                 score.text = score.value;
             });
         });
+
+
+        scene('lose', ({ score }) => {
+            add([text(score, 32), origin('center'), pos(width() / 2, height() / 2)]);
+        });
+
+        // scene("lose", (score) => {
+        //     // display score passed by scene "game"
+        //     add([
+        //         text(score.value),
+        //     ]);
+        // });
+
         start("game");
     }
 }

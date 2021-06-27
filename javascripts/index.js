@@ -7,3 +7,8 @@ document.addEventListener("submit", (e) => {
 });
 
 
+// lose POST /scores
+// GET /scores
+// render score index - <li> player - score 
+//
+
