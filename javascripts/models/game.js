@@ -2,8 +2,8 @@ class Game {
     constructor(player) {
         this.player = player;
     }
-    init() {
 
+    init() {
         const canvas = document.getElementById("game");
         canvas.classList.remove("hidden");
         kaboom({
@@ -31,7 +31,6 @@ class Game {
 
 
         scene("game", () => {
-            console.log(scene);
             layers(['bg', 'obj', 'ui'], 'obj');
             const map = [
                 '     j            j   j             j     j              j     j          j         ',
@@ -200,17 +199,10 @@ class Game {
             });
         });
 
-
-        scene('lose', ({ score }) => {
+        scene('lose', ({ score, playerId }) => {
             add([text(score, 32), origin('center'), pos(width() / 2, height() / 2)]);
+            ScoreApi.postPlayerScore(score, this.player.id);
         });
-
-        // scene("lose", (score) => {
-        //     // display score passed by scene "game"
-        //     add([
-        //         text(score.value),
-        //     ]);
-        // });
 
         start("game");
     }

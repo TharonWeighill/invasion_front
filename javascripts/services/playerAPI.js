@@ -2,6 +2,7 @@ class PlayerApi {
 
     static url = `http://localhost:3000/players`;
 
+
     static fetchPlayer() {
         fetch(this.url)
             .then(resp => resp.json())
