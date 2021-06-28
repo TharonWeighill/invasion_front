@@ -21,6 +21,7 @@
     "lite-server": "^2.6.1"
   },
   "dependencies": {
-    "kaboom": "^0.5.1"
+    "kaboom": "^0.5.1",
+    "nes.css": "^2.3.0"
   }
 }
