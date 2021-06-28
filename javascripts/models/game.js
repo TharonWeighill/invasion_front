@@ -200,8 +200,13 @@ class Game {
         });
 
         scene('lose', ({ score, playerId }) => {
-            add([text(score, 32), origin('center'), pos(width() / 2, height() / 2)]);
-            ScoreApi.postPlayerScore(score, this.player.id);
+            // add([text(score, 32), origin('center'), pos(width() / 2, height() / 2)]);
+            ScoreApi.postPlayerScore(score, this.player.id)
+                .then((scores) => {
+                    const scoreBoard = new Scoreboard(scores);
+                    scoreBoard.render(score);
+                });
+
         });
 
         start("game");

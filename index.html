@@ -18,12 +18,17 @@
         <input type="text" name="name" id="player-name" placeholder="Alien Name" />
         <button type="submit" class="btn btn-primary btn-block btn-large">Start your Attack</button>
     </form>
-    <canvas id="scoreboard">
-        <li></li>
-    </canvas>
+    <div id="scoreboard" class="hidden">
+        <h2 id="player-score"></h2>
+        <h3 id="scoreboard-heading">Top Scores:</h3>
+        <ol id="top-scores">
+        </ol>
+    </div>
+
     <script src="https://kaboomjs.com/lib/0.5.1/kaboom.js"></script>
     <script src="javascripts/models/game.js"></script>
     <script src="javascripts/services/playerAPI.js"></script>
+    <script src="javascripts/models/scoreboard.js"></script>
     <script src="javascripts/services/scoreAPI.js"></script>
     <script src="javascripts/index.js"></script>
     <script src="javascripts/global.js"></script>

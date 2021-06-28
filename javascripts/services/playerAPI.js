@@ -1,5 +1,4 @@
 class PlayerApi {
-
     static url = `http://localhost:3000/players`;
 
 
@@ -37,5 +36,4 @@ class PlayerApi {
             })
             .catch((error) => console.error(error));
     }
-
 }

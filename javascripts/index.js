@@ -5,10 +5,3 @@ document.addEventListener("submit", (e) => {
             game.init();
         });
 });
-
-
-// lose POST /scores
-// GET /scores
-// render score index - <li> player - score 
-//
-
